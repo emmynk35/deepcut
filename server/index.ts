@@ -1,5 +1,5 @@
-import { readFile } from 'node:fs/promises'
 import express from 'express'
+import { FestivalError, getFestivalLineup, searchFestivals } from './festivals.ts'
 import { getInfo, getSimilar, LastFmError } from './lastfm.ts'
 import { recommend } from './recommend.ts'
 
@@ -10,16 +10,24 @@ if (!apiKey) {
   process.exit(1)
 }
 
-const lineupPath = new URL('../data/electric-forest-2026.json', import.meta.url)
 const app = express()
 
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true })
 })
 
-app.get('/api/festival', async (_req, res, next) => {
+app.get('/api/festivals/search', async (req, res, next) => {
+  const q = typeof req.query.q === 'string' ? req.query.q.trim().slice(0, 80) : ''
   try {
-    res.json(JSON.parse(await readFile(lineupPath, 'utf8')))
+    res.json(q ? await searchFestivals(q) : [])
+  } catch (err) {
+    next(err)
+  }
+})
+
+app.get('/api/festivals/:slug', async (req, res, next) => {
+  try {
+    res.json(await getFestivalLineup(req.params.slug))
   } catch (err) {
     next(err)
   }
@@ -50,7 +58,19 @@ app.get('/api/artists/info', async (req, res, next) => {
 })
 
 app.post('/api/recommend', express.json({ limit: '1mb' }), async (req, res, next) => {
-  const { taste, familiar, limit } = req.body ?? {}
+  const { taste, familiar, limit, discovery, artists } = req.body ?? {}
+  const validArtists =
+    Array.isArray(artists) &&
+    artists.length > 0 &&
+    artists.length <= 400 &&
+    artists.every(
+      (a) =>
+        typeof a?.name === 'string' &&
+        a.name.trim() !== '' &&
+        a.name.length <= 100 &&
+        (a.likes === undefined || typeof a.likes === 'number'),
+    )
+  if (!validArtists) return void res.status(400).json({ error: 'artists (1-400 names) are required' })
   const validTaste =
     Array.isArray(taste) &&
     taste.length > 0 &&
@@ -60,16 +80,18 @@ app.post('/api/recommend', express.json({ limit: '1mb' }), async (req, res, next
     return void res.status(400).json({ error: 'taste and familiar are required' })
   }
   try {
-    const festival = JSON.parse(await readFile(lineupPath, 'utf8'))
     const count = Number.isInteger(limit) ? Math.min(Math.max(limit, 1), 50) : 10
-    res.json(await recommend(apiKey, festival.artists, taste, familiar, count))
+    const intensity = typeof discovery === 'number' ? Math.min(Math.max(discovery, 0), 1) : 0.5
+    res.json(await recommend(apiKey, artists, taste, familiar, count, intensity))
   } catch (err) {
     next(err)
   }
 })
 
 app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  if (err instanceof LastFmError) return void res.status(err.status).json({ error: err.message })
+  if (err instanceof LastFmError || err instanceof FestivalError) {
+    return void res.status(err.status).json({ error: err.message })
+  }
   console.error(err)
   res.status(500).json({ error: 'Internal server error' })
 })

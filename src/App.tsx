@@ -1,36 +1,52 @@
 import { useEffect, useMemo, useState } from 'react'
 import ArtistCard from './ArtistCard.tsx'
+import { loadLineup, persistLineup, type FestivalSummary, type Lineup } from './lineup.ts'
 import { loadSaved, persistSaved, toggleSaved } from './saved.ts'
 import type { PickedTrack } from './recommend/pickTracks.ts'
 import type { Recommendation } from './recommend/score.ts'
 import { getAccessToken, handleCallback, login, logout } from './spotify/auth.ts'
 import { createPlaylist } from './spotify/playlist.ts'
+import type { TasteProfile } from './spotify/profile.ts'
 import { fetchTasteProfile } from './spotify/taste.ts'
 import { findTracks } from './spotify/tracks.ts'
-
-interface Festival {
-  festival: { name: string; location: string; dates: { start: string; end: string } }
-  artists: { name: string }[]
-}
 
 type Phase = 'idle' | 'profile' | 'ranking' | 'done'
 
 const PHASE_LABEL: Record<Phase, string> = {
   idle: '',
   profile: 'Reading your Spotify taste…',
-  ranking: 'Ranking the lineup (the first run can take a minute)…',
+  ranking: 'Looking up the lineup on Last.fm (the first run can take a minute)…',
   done: '',
+}
+
+// Fixed product choices: always go for lesser-known acts, always 21 of them.
+const ADVENTUROUS = 1
+const ARTIST_COUNT = 21
+
+async function getJson<T>(url: string): Promise<T> {
+  const res = await fetch(url)
+  if (!res.ok) {
+    const body = await res.json().catch(() => null)
+    throw new Error(body?.error ?? `Request failed (${res.status})`)
+  }
+  return res.json()
 }
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(() => getAccessToken() !== null)
-  const [festival, setFestival] = useState<Festival | null>(null)
+  const [lineup, setLineup] = useState<Lineup | null>(() => loadLineup())
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState<FestivalSummary[]>([])
+  const [searching, setSearching] = useState(false)
+  const [loadingLineup, setLoadingLineup] = useState(false)
   const [phase, setPhase] = useState<Phase>('idle')
   const [recs, setRecs] = useState<Recommendation[]>([])
   const [tracks, setTracks] = useState<Record<string, PickedTrack[]>>({})
   const [saved, setSaved] = useState<string[]>(() => loadSaved())
   const [playlistUrl, setPlaylistUrl] = useState<string | null>(null)
   const [creating, setCreating] = useState(false)
+  const [profile, setProfile] = useState<TasteProfile | null>(null)
+  const [editing, setEditing] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -39,35 +55,76 @@ export default function App() {
       .catch((e) => setError(String(e)))
   }, [])
 
+  const trimmed = query.trim()
+  const visibleResults = trimmed.length >= 2 ? results : []
+
   useEffect(() => {
-    fetch('/api/festival')
-      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`Lineup failed (${res.status})`))))
-      .then(setFestival)
-      .catch((e) => setError(String(e)))
-  }, [])
+    if (trimmed.length < 2) return
+    const timer = setTimeout(() => {
+      setSearching(true)
+      getJson<FestivalSummary[]>(`/api/festivals/search?q=${encodeURIComponent(trimmed)}`)
+        .then(setResults)
+        .catch((e) => setError(String(e)))
+        .finally(() => setSearching(false))
+    }, 300)
+    return () => clearTimeout(timer)
+  }, [trimmed])
 
   const uris = useMemo(() => recs.flatMap((r) => (tracks[r.name] ?? []).map((t) => t.uri)), [recs, tracks])
 
-  async function discover() {
-    setError(null)
-    setPlaylistUrl(null)
+  function resetResults() {
     setRecs([])
     setTracks({})
+    setPlaylistUrl(null)
+  }
+
+  async function chooseFestival(festival: FestivalSummary) {
+    setError(null)
+    setLoadingLineup(true)
     try {
-      setPhase('profile')
-      const profile = await fetchTasteProfile()
+      const data = await getJson<Lineup & { slug: string }>(`/api/festivals/${festival.slug}`)
+      const next = { name: data.name, artists: data.artists }
+      persistLineup(next)
+      setLineup(next)
+      setQuery('')
+      setResults([])
+      resetResults()
+    } catch (e) {
+      setError(String(e))
+    } finally {
+      setLoadingLineup(false)
+    }
+  }
+
+  async function discover() {
+    if (!lineup) return
+    setError(null)
+    resetResults()
+    try {
+      let taste = profile
+      if (!taste) {
+        setPhase('profile')
+        taste = await fetchTasteProfile()
+        setProfile(taste)
+      }
       setPhase('ranking')
       const res = await fetch('/api/recommend', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ taste: profile.taste, familiar: profile.familiar, limit: 10 }),
+        body: JSON.stringify({
+          artists: lineup.artists,
+          taste: taste.taste,
+          familiar: taste.familiar,
+          limit: ARTIST_COUNT,
+          discovery: ADVENTUROUS,
+        }),
       })
       if (!res.ok) throw new Error(`Recommend failed (${res.status})`)
-      const list: Recommendation[] = await res.json()
-      setRecs(list)
+      const data: { recommendations: Recommendation[] } = await res.json()
+      setRecs(data.recommendations)
       setPhase('done')
       await Promise.all(
-        list.map(async (r) => {
+        data.recommendations.map(async (r) => {
           const found = await findTracks(r.name).catch(() => [])
           setTracks((prev) => ({ ...prev, [r.name]: found }))
         }),
@@ -79,13 +136,13 @@ export default function App() {
   }
 
   async function exportPlaylist() {
-    if (!festival) return
+    if (!lineup) return
     setCreating(true)
     setError(null)
     try {
       setPlaylistUrl(
         await createPlaylist(
-          `DeepCut — ${festival.festival.name}`,
+          `DeepCut — ${lineup.name}`,
           'Hidden gems from the lineup, picked from my Spotify taste.',
           uris,
         ),
@@ -117,7 +174,8 @@ export default function App() {
             onClick={() => {
               logout()
               setLoggedIn(false)
-              setRecs([])
+              resetResults()
+              setProfile(null)
             }}
           >
             Log out
@@ -127,54 +185,84 @@ export default function App() {
 
       {error && <p className="error">{error}</p>}
 
-      {!loggedIn ? (
-        <section className="hero">
-          <h2 style={{ marginTop: 0 }}>{festival?.festival.name ?? 'Your festival'}</h2>
-          <p>
-            Connect Spotify and DeepCut finds the smaller acts on the lineup that match your taste, then builds a
-            playlist to listen to before you go.
-          </p>
-          <button className="primary" onClick={() => login()}>
-            Connect Spotify
-          </button>
-        </section>
-      ) : (
-        <>
-          <h2>{festival?.festival.name ?? 'Festival'}</h2>
-          <button className="primary" disabled={busy} onClick={discover}>
-            {recs.length ? 'Run again' : 'Find my hidden gems'}
-          </button>
-          {busy && <p>{PHASE_LABEL[phase]}</p>}
-
-          {recs.length > 0 && (
-            <>
-              <h2>Your hidden gems</h2>
-              <ul className="grid">
-                {recs.map((r) => (
-                  <ArtistCard
-                    key={r.name}
-                    rec={r}
-                    tracks={tracks[r.name]}
-                    saved={saved.includes(r.name)}
-                    onToggleSave={() => onToggleSave(r.name)}
-                  />
-                ))}
-              </ul>
-
-              <h2>Playlist</h2>
-              <p>{uris.length} tracks from these artists.</p>
-              {playlistUrl ? (
-                <p>
-                  Playlist created: <a href={playlistUrl}>open in Spotify</a>
-                </p>
-              ) : (
-                <button className="primary" disabled={creating || uris.length === 0} onClick={exportPlaylist}>
-                  {creating ? 'Creating…' : 'Create Spotify playlist'}
-                </button>
+      <h2>Festival</h2>
+      <section className={lineup ? undefined : 'hero'}>
+        <div className="picker">
+          <input
+            aria-label="Search for a festival"
+            value={editing ? query : (lineup?.name ?? '')}
+            onFocus={() => {
+              setEditing(true)
+              setQuery('')
+            }}
+            onBlur={() => setTimeout(() => setEditing(false), 150)}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={lineup ? `${lineup.name} — search to change` : 'Search for a festival, e.g. Electric Forest'}
+          />
+          {editing && (visibleResults.length > 0 || searching || loadingLineup || trimmed.length >= 2) && (
+            <ul className="results">
+              {(searching || loadingLineup) && <li className="meta">{loadingLineup ? 'Loading lineup…' : 'Searching…'}</li>}
+              {visibleResults.map((f) => (
+                <li key={f.slug}>
+                  <button disabled={loadingLineup} onMouseDown={(e) => e.preventDefault()} onClick={() => chooseFestival(f)}>
+                    {f.name} {f.year}
+                  </button>
+                </li>
+              ))}
+              {!searching && trimmed.length >= 2 && visibleResults.length === 0 && (
+                <li className="meta">No festivals found for "{trimmed}".</li>
               )}
+            </ul>
+          )}
+        </div>
+        {lineup && (
+          <details className="lineup">
+            <summary>{lineup.artists.length} acts on the lineup</summary>
+            <ul className="chips">
+              {lineup.artists.map((a) => (
+                <li key={a.name}>{a.name}</li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </section>
+
+      {lineup && (
+        <>
+          <h2>Your hidden gems</h2>
+          {!loggedIn ? (
+            <section className="hero">
+              <p style={{ marginTop: 0 }}>
+                Connect Spotify and DeepCut finds the smaller acts on this lineup that match your taste.
+              </p>
+              <button className="primary" onClick={() => login()}>
+                Connect Spotify
+              </button>
+            </section>
+          ) : (
+            <>
+              <button className="primary" disabled={busy} onClick={discover}>
+                {recs.length ? 'Run again' : 'Find my hidden gems'}
+              </button>
+              {busy && <p>{PHASE_LABEL[phase]}</p>}
+              {phase === 'done' && recs.length === 0 && <p>No hidden gems found on this lineup.</p>}
             </>
           )}
         </>
+      )}
+
+      {recs.length > 0 && (
+        <ul className="grid">
+          {recs.map((r) => (
+            <ArtistCard
+              key={r.name}
+              rec={r}
+              tracks={tracks[r.name]}
+              saved={saved.includes(r.name)}
+              onToggleSave={() => onToggleSave(r.name)}
+            />
+          ))}
+        </ul>
       )}
 
       {saved.length > 0 && (
@@ -190,18 +278,25 @@ export default function App() {
         </>
       )}
 
-      {festival && (
-        <details style={{ marginTop: 32 }}>
-          <summary>
-            Full lineup ({festival.artists.length} acts) · {festival.festival.location}
-          </summary>
-          <p className="meta">{festival.artists.map((a) => a.name).join(' · ')}</p>
-        </details>
-      )}
-
       <footer className="footer">
-        Artist similarity data from <a href="https://www.last.fm">Last.fm</a>.
+        Artist similarity data from <a href="https://www.last.fm">Last.fm</a>. Festival lineups from{' '}
+        <a href="https://www.festivaldust.com">Festival Dust</a>.
       </footer>
+
+      {recs.length > 0 && (
+        <div className="playlist-bar">
+          <span>{uris.length} tracks ready for your playlist</span>
+          {playlistUrl ? (
+            <a className="button-link" href={playlistUrl} target="_blank" rel="noreferrer">
+              Open playlist in Spotify ↗
+            </a>
+          ) : (
+            <button className="primary big" disabled={creating || uris.length === 0} onClick={exportPlaylist}>
+              {creating ? 'Creating…' : '▶ Create Spotify playlist'}
+            </button>
+          )}
+        </div>
+      )}
     </main>
   )
 }

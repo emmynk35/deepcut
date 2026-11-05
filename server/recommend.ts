@@ -3,7 +3,7 @@ import { rankArtists, type LineupArtist, type SimilarArtist, type TasteArtist } 
 
 interface FestivalArtist {
   name: string
-  likes: number
+  likes?: number
 }
 
 const CONCURRENCY = 5
@@ -21,18 +21,24 @@ async function mapLimit<T, R>(items: T[], fn: (item: T) => Promise<R>): Promise<
   return results
 }
 
-// Not-found acts are skipped so they are never recommended.
-async function enrich(apiKey: string, artists: FestivalArtist[]): Promise<LineupArtist[]> {
-  const rows = await mapLimit(artists, async (a) => {
+// Not-found acts are skipped so they are never recommended, and reported back instead.
+async function enrich(
+  apiKey: string,
+  artists: FestivalArtist[],
+): Promise<{ lineup: LineupArtist[]; unmatched: string[] }> {
+  const rows = await mapLimit<FestivalArtist, LineupArtist | null>(artists, async (a) => {
     try {
-      const [info, similar] = await Promise.all([getInfo(apiKey, a.name), getSimilar(apiKey, a.name)])
+      const [info, similar] = await Promise.all([getInfo(apiKey, a.name), getSimilar(apiKey, a.name, 100)])
       return { name: a.name, likes: a.likes, listeners: info.listeners, similar }
     } catch (err) {
       if (err instanceof LastFmError && err.status === 404) return null
       throw err
     }
   })
-  return rows.filter((r): r is LineupArtist => r !== null)
+  return {
+    lineup: rows.filter((r): r is LineupArtist => r !== null),
+    unmatched: artists.filter((_, i) => rows[i] === null).map((a) => a.name),
+  }
 }
 
 async function neighbors(apiKey: string, taste: TasteArtist[]): Promise<Record<string, SimilarArtist[]>> {
@@ -53,7 +59,21 @@ export async function recommend(
   taste: TasteArtist[],
   familiar: string[],
   limit: number,
+  discovery: number,
 ) {
-  const [lineup, userSimilar] = await Promise.all([enrich(apiKey, festivalArtists), neighbors(apiKey, taste)])
-  return rankArtists(lineup, taste, { familiar, userSimilar, limit })
+  const [{ lineup, unmatched }, userSimilar] = await Promise.all([
+    enrich(apiKey, festivalArtists),
+    neighbors(apiKey, taste),
+  ])
+  // 0 = play it safe, 1 = most adventurous; 0.5 matches the default 0.6/0.4 weights.
+  const discoveryWeight = 0.2 + 0.4 * discovery
+  const recommendations = rankArtists(lineup, taste, {
+    familiar,
+    userSimilar,
+    limit,
+    discoveryWeight,
+    tasteWeight: 1 - discoveryWeight,
+    minDiscovery: 0.15,
+  })
+  return { recommendations, unmatched }
 }

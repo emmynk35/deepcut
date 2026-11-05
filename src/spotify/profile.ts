@@ -25,7 +25,7 @@ const SOURCE_WEIGHT: Record<SignalSource, number> = {
   recent: 0.3,
 }
 
-const TASTE_SIZE = 25
+const TASTE_SIZE = 50
 
 // Pure: merges ranked signals into weighted taste artists. Higher rank in a signal counts more.
 export function buildProfile(signals: Signal[]): TasteProfile {

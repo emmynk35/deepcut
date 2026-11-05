@@ -141,3 +141,150 @@ details summary {
   margin-top: 48px;
   font-size: 0.8rem;
 }
+
+.controls {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+
+select {
+  font: inherit;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text-h);
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+input[type='text'],
+input:not([type]),
+textarea {
+  font: inherit;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.chips li {
+  padding: 2px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.playlist-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  background: var(--panel);
+  border-top: 2px solid var(--accent);
+  color: var(--text-h);
+}
+
+button.big,
+.button-link {
+  font-size: 1.1rem;
+  padding: 12px 24px;
+}
+
+.button-link {
+  border-radius: 8px;
+  background: var(--accent);
+  color: #12091c;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.app {
+  padding-bottom: 96px;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+  max-width: 360px;
+}
+
+.results button {
+  width: 100%;
+  text-align: left;
+}
+
+.picker {
+  position: relative;
+  max-width: 480px;
+}
+
+.picker input {
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+.picker .results {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  max-width: none;
+  margin: 4px 0 0;
+  padding: 6px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.picker .results li.meta {
+  padding: 6px 10px;
+}
+
+details.lineup {
+  margin-top: 8px;
+}

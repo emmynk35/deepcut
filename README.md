@@ -51,7 +51,7 @@ npm run preview  # preview the production build
 
 ## Attribution and data terms
 
-Artist similarity data is provided by [Last.fm](https://www.last.fm). This is a non-commercial portfolio project and is not publicly hosted (Last.fm requires written approval for public pages). Cached Last.fm data is not committed; regenerate it with `npm run coverage:lastfm`. Spotify data comes from the Spotify Web API under Development Mode.
+Artist similarity data is provided by [Last.fm](https://www.last.fm). This is a non-commercial portfolio project and is not publicly hosted (Last.fm requires written approval for public pages). Cached Last.fm data is not committed; regenerate it with `npm run coverage:lastfm`. Spotify data comes from the Spotify Web API under Development Mode. Festival lineups are read on demand from [Festival Dust](https://www.festivaldust.com), an unofficial source with no public API, so it may change or break without notice. Lineups are cached in memory only and not stored in this repository.
 
 ## Status
 

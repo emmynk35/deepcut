@@ -8,7 +8,7 @@ export interface SimilarArtist {
 export interface LineupArtist {
   name: string
   listeners: number
-  likes: number
+  likes?: number
   similar: SimilarArtist[]
 }
 
@@ -70,7 +70,9 @@ export function rankArtists(
   if (totalWeight === 0) return []
 
   const listeners = lineup.map((a) => a.listeners)
-  const likes = lineup.map((a) => a.likes)
+  // Festival likes are only used when every act has them (pasted lineups have none).
+  const useLikes = lineup.every((a) => a.likes !== undefined)
+  const likes = lineup.map((a) => a.likes ?? 0)
   const range = (xs: number[]) => [Math.min(...xs), Math.max(...xs)] as const
   const [minL, maxL] = range(listeners)
   const [minK, maxK] = range(likes)
@@ -82,7 +84,8 @@ export function rankArtists(
         .map((t) => ({ artist: t.name, similarity: similarity(a, t, options), weight: t.weight }))
         .filter((r) => r.similarity > 0)
       const rawTaste = reasons.reduce((sum, r) => sum + r.similarity * r.weight, 0) / totalWeight
-      const discovery = 0.7 * smallness(a.listeners, minL, maxL) + 0.3 * smallness(a.likes, minK, maxK)
+      const listenerSmallness = smallness(a.listeners, minL, maxL)
+      const discovery = useLikes ? 0.7 * listenerSmallness + 0.3 * smallness(a.likes ?? 0, minK, maxK) : listenerSmallness
       return {
         name: a.name,
         rawTaste,

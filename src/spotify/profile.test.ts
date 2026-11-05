@@ -21,9 +21,9 @@ describe('buildProfile', () => {
   })
 
   it('keeps all artists as familiar but caps taste size', () => {
-    const names = Array.from({ length: 60 }, (_, i) => `Artist ${i}`)
+    const names = Array.from({ length: 80 }, (_, i) => `Artist ${i}`)
     const profile = buildProfile([{ source: 'top-long', artists: names }])
-    expect(profile.taste).toHaveLength(25)
-    expect(profile.familiar).toHaveLength(60)
+    expect(profile.taste).toHaveLength(50)
+    expect(profile.familiar).toHaveLength(80)
   })
 })
