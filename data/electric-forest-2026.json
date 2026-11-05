@@ -1,0 +1,2039 @@
+{
+  "festival": {
+    "slug": "electric-forest-2026",
+    "name": "Electric Forest 2026",
+    "location": "Rothbury, MI",
+    "dates": {
+      "start": "2026-06-25",
+      "end": "2026-06-28"
+    },
+    "stages": [
+      "Ranch Arena",
+      "Sherwood Court",
+      "Tripolee",
+      "The Observatory",
+      "Honeycomb",
+      "Center Stage",
+      "Grand Artique"
+    ],
+    "source": "festivaldust.com (set times and likes); lineup hand-checked later"
+  },
+  "artists": [
+    {
+      "name": "GRiZ",
+      "likes": 1151,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Ranch Arena",
+          "startTime": "00:00",
+          "durationMinutes": 120
+        },
+        {
+          "day": 4,
+          "stage": "Sherwood Court",
+          "startTime": "20:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Levity",
+      "likes": 990,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Ranch Arena",
+          "startTime": "21:45",
+          "durationMinutes": 80
+        }
+      ]
+    },
+    {
+      "name": "Excision",
+      "likes": 887,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Ranch Arena",
+          "startTime": "00:30",
+          "durationMinutes": 120
+        }
+      ]
+    },
+    {
+      "name": "ILLENIUM",
+      "likes": 822,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Ranch Arena",
+          "startTime": "23:30",
+          "durationMinutes": 120
+        }
+      ]
+    },
+    {
+      "name": "Wooli",
+      "likes": 809,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Sherwood Court",
+          "startTime": "22:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Disco Lines",
+      "likes": 794,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Ranch Arena",
+          "startTime": "21:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Sidepiece",
+      "likes": 756,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Honeycomb",
+          "startTime": "00:00",
+          "durationMinutes": 60
+        },
+        {
+          "day": 2,
+          "stage": "Sherwood Court",
+          "startTime": "21:00",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Whethan",
+      "likes": 746,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "23:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "ISOxo",
+      "likes": 725,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Sherwood Court",
+          "startTime": "01:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Ganja White Night",
+      "likes": 709,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Sherwood Court",
+          "startTime": "01:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Kai Wachi",
+      "likes": 707,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "00:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Kaskade",
+      "likes": 705,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Ranch Arena",
+          "startTime": "21:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "LSDream",
+      "likes": 689,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Sherwood Court",
+          "startTime": "00:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Chris Lake",
+      "likes": 675,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Ranch Arena",
+          "startTime": "02:00",
+          "durationMinutes": 120
+        }
+      ]
+    },
+    {
+      "name": "Odd Mob",
+      "likes": 634,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Tripolee",
+          "startTime": "01:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "DJ Diesel b2b T-Pain",
+      "likes": 634,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "02:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Galantis",
+      "likes": 613,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "00:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Laszewo",
+      "likes": 609,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Honeycomb",
+          "startTime": "23:30",
+          "durationMinutes": 60
+        },
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "01:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Daily Bread",
+      "likes": 597,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Ranch Arena",
+          "startTime": "20:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Sammy Virji",
+      "likes": 590,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Sherwood Court",
+          "startTime": "02:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Eli Brown",
+      "likes": 569,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Tripolee",
+          "startTime": "02:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "JKYL & Hyde",
+      "likes": 537,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "The Observatory",
+          "startTime": "21:30",
+          "durationMinutes": 45
+        }
+      ]
+    },
+    {
+      "name": "Sullivan King",
+      "likes": 537,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "01:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Alleycvt",
+      "likes": 525,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Sherwood Court",
+          "startTime": "23:00",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Avello",
+      "likes": 525,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "19:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Madeon",
+      "likes": 522,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Sherwood Court",
+          "startTime": "21:45",
+          "durationMinutes": 65
+        }
+      ]
+    },
+    {
+      "name": "Effin",
+      "likes": 492,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Ranch Arena",
+          "startTime": "18:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Passion Pit",
+      "likes": 486,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Sherwood Court",
+          "startTime": "23:00",
+          "durationMinutes": 90
+        }
+      ]
+    },
+    {
+      "name": "Mary Droppinz",
+      "likes": 477,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "The Observatory",
+          "startTime": "21:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Sippy",
+      "likes": 459,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "20:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Lane 8",
+      "likes": 448,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Tripolee",
+          "startTime": "00:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Jigitz",
+      "likes": 444,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "The Observatory",
+          "startTime": "00:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Omnom",
+      "likes": 420,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Tripolee",
+          "startTime": "21:00",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "The String Cheese Incident",
+      "likes": 419,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Ranch Arena",
+          "startTime": "19:00",
+          "durationMinutes": 225
+        }
+      ]
+    },
+    {
+      "name": "Starjunk 95",
+      "likes": 411,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Honeycomb",
+          "startTime": "22:00",
+          "durationMinutes": 60
+        },
+        {
+          "day": 3,
+          "stage": "Sherwood Court",
+          "startTime": "18:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Ravenscoon",
+      "likes": 407,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "22:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Capochino",
+      "likes": 405,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "18:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Ship Wrek",
+      "likes": 391,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Sherwood Court",
+          "startTime": "19:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "MPH",
+      "likes": 388,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "The Observatory",
+          "startTime": "22:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Westend",
+      "likes": 382,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Tripolee",
+          "startTime": "23:45",
+          "durationMinutes": 60
+        },
+        {
+          "day": 2,
+          "stage": "Honeycomb",
+          "startTime": "23:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Richard Finger",
+      "likes": 378,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "The Observatory",
+          "startTime": "02:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Heyz",
+      "likes": 370,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "21:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Devault",
+      "likes": 363,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Tripolee",
+          "startTime": "22:45",
+          "durationMinutes": 60
+        },
+        {
+          "day": 2,
+          "stage": "Honeycomb",
+          "startTime": "01:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Lightcode",
+      "likes": 361,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Ranch Arena",
+          "startTime": "15:30",
+          "durationMinutes": 90
+        }
+      ]
+    },
+    {
+      "name": "Probcause",
+      "likes": 323,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "The Observatory",
+          "startTime": "22:15",
+          "durationMinutes": 45
+        }
+      ]
+    },
+    {
+      "name": "Nikita, The Wicked",
+      "likes": 320,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "19:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Costa",
+      "likes": 319,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Honeycomb",
+          "startTime": "00:15",
+          "durationMinutes": 60
+        },
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "15:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Shpongle",
+      "likes": 307,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Sherwood Court",
+          "startTime": "23:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Wilkinson",
+      "likes": 305,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "21:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "D.O.D",
+      "likes": 299,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Tripolee",
+          "startTime": "00:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Bob Moses",
+      "likes": 294,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Grand Artique",
+          "startTime": "22:45",
+          "durationMinutes": 75
+        },
+        {
+          "day": 4,
+          "stage": "Tripolee",
+          "startTime": "23:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Muzz",
+      "likes": 287,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "17:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Ivy Lab",
+      "likes": 279,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "20:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Jkyl, The Wicked",
+      "likes": 274,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Honeycomb",
+          "startTime": "02:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Riot",
+      "likes": 269,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "17:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Andy C",
+      "likes": 256,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "22:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Channel Tres",
+      "likes": 256,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Ranch Arena",
+          "startTime": "00:00",
+          "durationMinutes": 75
+        },
+        {
+          "day": 3,
+          "stage": "Honeycomb",
+          "startTime": "20:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Swimming Paul",
+      "likes": 237,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Ranch Arena",
+          "startTime": "18:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "All:lo Collective: Parkbreezy, Pheel,tf Marz & Thought Process",
+      "likes": 236,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "The Observatory",
+          "startTime": "00:15",
+          "durationMinutes": 105
+        }
+      ]
+    },
+    {
+      "name": "LSD Clownsystem",
+      "likes": 228,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "The Observatory",
+          "startTime": "02:30",
+          "durationMinutes": 60
+        },
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "23:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Vincent Antone",
+      "likes": 228,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Grand Artique",
+          "startTime": "21:30",
+          "durationMinutes": 60
+        },
+        {
+          "day": 4,
+          "stage": "Sherwood Court",
+          "startTime": "17:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Nitepunk",
+      "likes": 226,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "18:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Steller",
+      "likes": 223,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Tripolee",
+          "startTime": "16:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Dixon's Violin",
+      "likes": 222,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "The Observatory",
+          "startTime": "18:15",
+          "durationMinutes": 60
+        },
+        {
+          "day": 4,
+          "stage": "Honeycomb",
+          "startTime": "01:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Hershe",
+      "likes": 221,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "The Observatory",
+          "startTime": "20:45",
+          "durationMinutes": 45
+        }
+      ]
+    },
+    {
+      "name": "Tiffany Day",
+      "likes": 214,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "00:15",
+          "durationMinutes": 15
+        },
+        {
+          "day": 3,
+          "stage": "Grand Artique",
+          "startTime": "00:15",
+          "durationMinutes": 45
+        },
+        {
+          "day": 3,
+          "stage": "The Observatory",
+          "startTime": "16:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Jackie Hollander",
+      "likes": 213,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Tripolee",
+          "startTime": "20:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Shima",
+      "likes": 202,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "The Observatory",
+          "startTime": "20:00",
+          "durationMinutes": 45
+        }
+      ]
+    },
+    {
+      "name": "Sam Gellaitry",
+      "likes": 200,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Honeycomb",
+          "startTime": "02:15",
+          "durationMinutes": 60
+        },
+        {
+          "day": 3,
+          "stage": "Sherwood Court",
+          "startTime": "20:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Chmura",
+      "likes": 195,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Honeycomb",
+          "startTime": "23:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Tourist",
+      "likes": 188,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "The Observatory",
+          "startTime": "22:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Vandelux",
+      "likes": 187,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Honeycomb",
+          "startTime": "01:15",
+          "durationMinutes": 60
+        },
+        {
+          "day": 3,
+          "stage": "The Observatory",
+          "startTime": "21:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Frost Children",
+      "likes": 186,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "The Observatory",
+          "startTime": "00:30",
+          "durationMinutes": 70
+        }
+      ]
+    },
+    {
+      "name": "Claude Vonstroke",
+      "likes": 185,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "02:30",
+          "durationMinutes": 90
+        }
+      ]
+    },
+    {
+      "name": "Oppidan",
+      "likes": 182,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "The Observatory",
+          "startTime": "20:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "SBTRKT",
+      "likes": 179,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "The Observatory",
+          "startTime": "01:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Daniel Allan",
+      "likes": 177,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Tripolee",
+          "startTime": "21:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "MCR-T",
+      "likes": 177,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Honeycomb",
+          "startTime": "00:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "The Sponges",
+      "likes": 171,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Sherwood Court",
+          "startTime": "17:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Midnight Generation",
+      "likes": 170,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Honeycomb",
+          "startTime": "01:30",
+          "durationMinutes": 60
+        },
+        {
+          "day": 1,
+          "stage": "Ranch Arena",
+          "startTime": "20:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Kaleena Zanders",
+      "likes": 153,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Sherwood Court",
+          "startTime": "16:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Casey Club",
+      "likes": 150,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "The Observatory",
+          "startTime": "18:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Yaeji",
+      "likes": 150,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Tripolee",
+          "startTime": "22:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "INJI",
+      "likes": 149,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Ranch Arena",
+          "startTime": "17:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Night Tapes",
+      "likes": 148,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Sherwood Court",
+          "startTime": "21:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Ranger Trucco",
+      "likes": 147,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "The Observatory",
+          "startTime": "00:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Motifv",
+      "likes": 139,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Ranch Arena",
+          "startTime": "16:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Bipolar Sunshine",
+      "likes": 134,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Honeycomb",
+          "startTime": "20:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Close Friends Only",
+      "likes": 131,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Tripolee",
+          "startTime": "19:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Underscores",
+      "likes": 125,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Ranch Arena",
+          "startTime": "18:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Wes Mills",
+      "likes": 112,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Tripolee",
+          "startTime": "17:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "EOTO",
+      "likes": 111,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "The Observatory",
+          "startTime": "01:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Mild Minds",
+      "likes": 109,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "The Observatory",
+          "startTime": "19:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "INIKO",
+      "likes": 103,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "The Observatory",
+          "startTime": "21:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Brunello",
+      "likes": 101,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Honeycomb",
+          "startTime": "20:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "QRION",
+      "likes": 86,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Tripolee",
+          "startTime": "18:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Snow Wife",
+      "likes": 84,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Honeycomb",
+          "startTime": "19:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Lyrah",
+      "likes": 78,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "The Observatory",
+          "startTime": "19:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Eggy",
+      "likes": 76,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Sherwood Court",
+          "startTime": "19:00",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Chris Luno",
+      "likes": 76,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Tripolee",
+          "startTime": "19:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Supertaste",
+      "likes": 74,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Center Stage",
+          "startTime": "22:00",
+          "durationMinutes": 90
+        },
+        {
+          "day": 2,
+          "stage": "The Observatory",
+          "startTime": "16:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Party Pupils",
+      "likes": 73,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Center Stage",
+          "startTime": "01:10",
+          "durationMinutes": 35
+        },
+        {
+          "day": 4,
+          "stage": "Center Stage",
+          "startTime": "23:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Mr. Wobbles",
+      "likes": 72,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Grand Artique",
+          "startTime": "21:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Flying Mojito Bros",
+      "likes": 61,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Center Stage",
+          "startTime": "00:15",
+          "durationMinutes": 105
+        }
+      ]
+    },
+    {
+      "name": "Magoo",
+      "likes": 57,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Honeycomb",
+          "startTime": "22:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Daniel Donato's Cosmic Country",
+      "likes": 52,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Sherwood Court",
+          "startTime": "18:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "H&RRY",
+      "likes": 50,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Tripolee",
+          "startTime": "18:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Bardo",
+      "likes": 49,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Honeycomb",
+          "startTime": "02:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Future Joy",
+      "likes": 49,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "18:00",
+          "durationMinutes": 75
+        },
+        {
+          "day": 3,
+          "stage": "Center Stage",
+          "startTime": "22:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "GITF Party",
+      "likes": 49,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "The Observatory",
+          "startTime": "13:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Jai Wolf",
+      "likes": 48,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Honeycomb",
+          "startTime": "19:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Black House Radio",
+      "likes": 48,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Center Stage",
+          "startTime": "23:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Red Giant Project",
+      "likes": 48,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "02:00",
+          "durationMinutes": 90
+        },
+        {
+          "day": 3,
+          "stage": "Center Stage",
+          "startTime": "19:30",
+          "durationMinutes": 60
+        },
+        {
+          "day": 4,
+          "stage": "Grand Artique",
+          "startTime": "01:00",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Deadtronica",
+      "likes": 48,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Honeycomb",
+          "startTime": "23:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Cain Culto",
+      "likes": 47,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Honeycomb",
+          "startTime": "18:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "CREG",
+      "likes": 45,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Honeycomb",
+          "startTime": "18:30",
+          "durationMinutes": 45
+        }
+      ]
+    },
+    {
+      "name": "Rio Kosta",
+      "likes": 44,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "The Observatory",
+          "startTime": "18:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Rochelle Jordan",
+      "likes": 43,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Honeycomb",
+          "startTime": "22:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Wax Monkey",
+      "likes": 43,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Honeycomb",
+          "startTime": "18:00",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Saint Ludo",
+      "likes": 41,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Tripolee",
+          "startTime": "16:45",
+          "durationMinutes": 30
+        }
+      ]
+    },
+    {
+      "name": "Gilligan Moss",
+      "likes": 41,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Center Stage",
+          "startTime": "00:45",
+          "durationMinutes": 90
+        }
+      ]
+    },
+    {
+      "name": "Bricknasty",
+      "likes": 40,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "The Observatory",
+          "startTime": "17:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Jean Dawson",
+      "likes": 39,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Ranch Arena",
+          "startTime": "19:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "River Tiber",
+      "likes": 37,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Honeycomb",
+          "startTime": "21:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Mary Lattimore",
+      "likes": 36,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Center Stage",
+          "startTime": "20:15",
+          "durationMinutes": 60
+        },
+        {
+          "day": 3,
+          "stage": "Honeycomb",
+          "startTime": "15:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Tomcat Trumpet",
+      "likes": 35,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Grand Artique",
+          "startTime": "02:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Cofresi",
+      "likes": 34,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Center Stage",
+          "startTime": "19:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Couch",
+      "likes": 33,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Sherwood Court",
+          "startTime": "17:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Public Works Dept",
+      "likes": 31,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Grand Artique",
+          "startTime": "18:00",
+          "durationMinutes": 75
+        },
+        {
+          "day": 4,
+          "stage": "Grand Artique",
+          "startTime": "18:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Bombargo",
+      "likes": 31,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "The Observatory",
+          "startTime": "18:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Jojo Abot",
+      "likes": 30,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "00:30",
+          "durationMinutes": 60
+        },
+        {
+          "day": 2,
+          "stage": "Center Stage",
+          "startTime": "21:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Big Sis",
+      "likes": 28,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Center Stage",
+          "startTime": "23:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Shane Hall",
+      "likes": 26,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Center Stage",
+          "startTime": "19:00",
+          "durationMinutes": 45
+        }
+      ]
+    },
+    {
+      "name": "Detroit Party Band",
+      "likes": 24,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Center Stage",
+          "startTime": "18:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Fireflower",
+      "likes": 23,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Center Stage",
+          "startTime": "20:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Logie",
+      "likes": 23,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Grand Artique",
+          "startTime": "02:15",
+          "durationMinutes": 75
+        },
+        {
+          "day": 4,
+          "stage": "Grand Artique",
+          "startTime": "23:45",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Polyjamorous",
+      "likes": 23,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Grand Artique",
+          "startTime": "22:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Jerome Joyce",
+      "likes": 22,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Grand Artique",
+          "startTime": "23:30",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "King Bubble",
+      "likes": 21,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Grand Artique",
+          "startTime": "00:45",
+          "durationMinutes": 75
+        },
+        {
+          "day": 4,
+          "stage": "Center Stage",
+          "startTime": "20:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Kiyoka",
+      "likes": 20,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "15:40",
+          "durationMinutes": 20
+        },
+        {
+          "day": 4,
+          "stage": "Grand Artique",
+          "startTime": "20:10",
+          "durationMinutes": 20
+        }
+      ]
+    },
+    {
+      "name": "Shauhiin Davari",
+      "likes": 19,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Center Stage",
+          "startTime": "18:00",
+          "durationMinutes": 45
+        }
+      ]
+    },
+    {
+      "name": "Family Blood Feud",
+      "likes": 18,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "14:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Cry Queen",
+      "likes": 17,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Grand Artique",
+          "startTime": "16:30",
+          "durationMinutes": 75
+        },
+        {
+          "day": 4,
+          "stage": "Center Stage",
+          "startTime": "18:00",
+          "durationMinutes": 45
+        }
+      ]
+    },
+    {
+      "name": "Rambo Party",
+      "likes": 15,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Grand Artique",
+          "startTime": "22:15",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Culturefires",
+      "likes": 14,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Grand Artique",
+          "startTime": "21:00",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Barclay Crenshaw",
+      "likes": 13,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "20:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Keys",
+      "likes": 12,
+      "sets": [
+        {
+          "day": 1,
+          "stage": "Grand Artique",
+          "startTime": "19:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Raedy Lex",
+      "likes": 12,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "19:15",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Glizz",
+      "likes": 10,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Center Stage",
+          "startTime": "00:45",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Caitlin Cusack",
+      "likes": 9,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Grand Artique",
+          "startTime": "16:30",
+          "durationMinutes": 75
+        },
+        {
+          "day": 3,
+          "stage": "Grand Artique",
+          "startTime": "20:00",
+          "durationMinutes": 75
+        }
+      ]
+    },
+    {
+      "name": "Thought Process B2B Detox Unit",
+      "likes": 7,
+      "sets": [
+        {
+          "day": 2,
+          "stage": "Grand Artique",
+          "startTime": "21:30",
+          "durationMinutes": 60
+        }
+      ]
+    },
+    {
+      "name": "Emmie And Ryan",
+      "likes": 5,
+      "sets": [
+        {
+          "day": 3,
+          "stage": "Grand Artique",
+          "startTime": "14:15",
+          "durationMinutes": 45
+        }
+      ]
+    },
+    {
+      "name": "Solid Gold Forever",
+      "likes": 1,
+      "sets": [
+        {
+          "day": 4,
+          "stage": "Center Stage",
+          "startTime": "21:30",
+          "durationMinutes": 75
+        }
+      ]
+    }
+  ]
+}
