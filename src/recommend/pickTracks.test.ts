@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { explain } from './explain.ts'
+import { explain, matchRating } from './explain.ts'
 import { pickTracks } from './pickTracks.ts'
 
 const track = (name: string, artist: string, uri = `spotify:track:${name}`) => ({
@@ -38,7 +38,7 @@ describe('explain', () => {
         { artist: 'Zedd', similarity: 0.4 },
       ],
     })
-    expect(text).toContain('Lane 8 and Zedd')
-    expect(text).toContain('hidden gem')
+    expect(text).toBe('Because you listen to Lane 8 and Zedd')
+    expect(matchRating({ name: 'X', score: 0.5, taste: 0.94, discovery: 0.7, reasons: [] })).toBe('9.4/10 match')
   })
 })
