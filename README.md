@@ -6,7 +6,7 @@ DeepCut helps festivalgoers discover smaller, under-the-radar artists on an upco
 
 ## How it works
 
-1. **Choose a festival** – pick a lineup.
+1. **Choose a festival** – search by name and the lineup loads automatically.
 2. **Connect Spotify** – analyze your listening history and favorite artists.
 3. **Discover hidden gems** – smaller lineup artists that match your taste.
 4. **Explore** – recommended songs and why each artist might appeal to you.
@@ -27,27 +27,33 @@ Signals: listening history, similar artists/genres, familiarity, artist populari
 
 - Frontend: React + TypeScript (Vite)
 - Backend: Node + Express + TypeScript (`server/`), keeps API keys off the browser
-- Data: curated festival lineup (`data/`), Last.fm (similar artists, listener counts, tags), Spotify Web API (taste profile, playlists)
+- Data: festival lineups (Festival Dust, fetched on demand), Last.fm (similar artists, listener counts), Spotify Web API (taste profile, track search, playlists)
 
 ## Getting started
 
-Requires Node.js 20.19+ (or 22.12+) and npm.
+Requires Node.js 20.19+ (or 22.12+), npm, and a Spotify Premium account (needed for Spotify Development Mode).
+
+1. Create a free [Last.fm API key](https://www.last.fm/api/account/create).
+2. Create a Spotify app at the [developer dashboard](https://developer.spotify.com/dashboard) and add the redirect URI `http://127.0.0.1:5173/callback` (use `127.0.0.1`, not `localhost`). No client secret is needed.
+3. Run:
 
 ```bash
 npm install
-cp .env.example .env   # then set LASTFM_API_KEY (free: https://www.last.fm/api/account/create)
-npm run dev            # web at http://localhost:5173, API at http://127.0.0.1:3001
+cp .env.example .env   # set LASTFM_API_KEY and VITE_SPOTIFY_CLIENT_ID
+npm run dev            # web at http://127.0.0.1:5173, API at http://127.0.0.1:3001
+npm test         # unit tests
 npm run build    # type-check and production build
 npm run lint     # lint
-npm run preview  # preview the production build
 ```
+
+Open http://127.0.0.1:5173, search for a festival, connect Spotify, and click **Find my hidden gems**.
 
 ## Roadmap
 
-- **Phase 1** – Project setup, one festival lineup, Spotify OAuth, listening data.
-- **Phase 2** – Discovery algorithm and representative tracks.
-- **Phase 3** – Frontend experience: festival page, artist cards, playlist export, saved list.
-- **Phase 4** – Polish: tuning controls, discovery intensity, responsive UI.
+- **Phase 1** – Setup, festival lineups, Spotify login, taste profile. ✅
+- **Phase 2** – Discovery algorithm, representative tracks, explanations. ✅
+- **Phase 3** – Festival search, artist cards, playlist export, saved list. ✅
+- **Phase 4** – Polish: responsive UI, tuning, demo recording. In progress.
 
 ## Attribution and data terms
 

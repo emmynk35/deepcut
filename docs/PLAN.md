@@ -42,31 +42,30 @@ Discovery Score = Taste Match × Discovery Potential
 - [x] README, `.gitignore`, `.env.example`
 - [x] Express API with Last.fm proxy + 24h cache
 - [x] Electric Forest 2026 lineup (153 acts)
-- [ ] Commit baseline (conventional commits)
+- [x] Commit baseline (conventional commits)
 
-### Phase 1 — Data and Spotify
-- [ ] Check Last.fm coverage across all 153 lineup acts; list misses
-- [ ] Register Spotify app; confirm redirect URI rules and that `/me/top/*` and artist `genres` work
-- [ ] Spotify OAuth (PKCE) login
-- [ ] Build taste profile from top/followed/saved/recent
+### Phase 1 — Data and Spotify (done)
+- [x] Check Last.fm coverage across all 153 lineup acts; list misses
+- [x] Register Spotify app; confirm redirect URI rules and that `/me/top/*` works (artist genres are gone)
+- [x] Spotify OAuth (PKCE) login
+- [x] Build taste profile from top/followed/saved/recent
 
-### Phase 2 — Discovery algorithm
-- [ ] Name normalization (Last.fm ↔ lineup ↔ Spotify)
-- [ ] Scoring model with unit tests
-- [ ] Representative tracks per artist (Spotify search → URIs)
-- [ ] "Why this artist" explanations
+### Phase 2 — Discovery algorithm (done)
+- [x] Name normalization (Last.fm ↔ lineup ↔ Spotify)
+- [x] Scoring model with unit tests
+- [x] Representative tracks per artist (Spotify search → URIs)
+- [x] "Because you listen to…" explanations and match rating
 
-### Phase 3 — Frontend
-- [ ] Festival lineup page
-- [ ] Artist discovery cards with explanations
-- [ ] Playlist preview and Spotify export
-- [ ] Saved discovery list
+### Phase 3 — Frontend (done)
+- [x] Festival search by name (lineups from Festival Dust)
+- [x] Artist discovery cards with explanations
+- [x] Playlist export (sticky button)
+- [x] Saved discovery list
 
 ### Phase 4 — Polish
-- [ ] Familiarity controls and discovery-intensity slider
-- [ ] Playlist length setting
-- [ ] Responsive, polished UI
-- [ ] Deployment + demo (see open questions)
+- [x] Fixed adventurous mode, 21 artists (slider and count dropdown dropped)
+- [ ] Responsive, polished UI pass
+- [ ] Record demo (no hosting; see decisions)
 
 ## Open questions / unverified
 
