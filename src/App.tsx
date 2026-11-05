@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import ArtistCard from './ArtistCard.tsx'
 import { loadLineup, persistLineup, type FestivalSummary, type Lineup } from './lineup.ts'
 import { loadSaved, persistSaved, toggleSaved } from './saved.ts'
 import type { PickedTrack } from './recommend/pickTracks.ts'
 import type { Recommendation } from './recommend/score.ts'
+import { SpotifyApiError } from './spotify/api.ts'
 import { getAccessToken, handleCallback, login, logout } from './spotify/auth.ts'
 import { createPlaylist } from './spotify/playlist.ts'
 import type { TasteProfile } from './spotify/profile.ts'
@@ -48,11 +49,25 @@ export default function App() {
   const [profile, setProfile] = useState<TasteProfile | null>(null)
   const [editing, setEditing] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  // Bumped whenever results become stale (new run or new festival) so late responses are ignored.
+  const runId = useRef(0)
+
+  function fail(e: unknown) {
+    if (e instanceof SpotifyApiError && e.status === 401) {
+      logout()
+      setLoggedIn(false)
+      setProfile(null)
+      setPhase('idle')
+      setError('Your Spotify session expired. Please connect Spotify again.')
+      return
+    }
+    setError(e instanceof Error ? e.message : String(e))
+  }
 
   useEffect(() => {
     handleCallback()
       .then((done) => done && setLoggedIn(true))
-      .catch((e) => setError(String(e)))
+      .catch(fail)
   }, [])
 
   const trimmed = query.trim()
@@ -60,22 +75,28 @@ export default function App() {
 
   useEffect(() => {
     if (trimmed.length < 2) return
+    let cancelled = false
     const timer = setTimeout(() => {
       setSearching(true)
       getJson<FestivalSummary[]>(`/api/festivals/search?q=${encodeURIComponent(trimmed)}`)
-        .then(setResults)
-        .catch((e) => setError(String(e)))
-        .finally(() => setSearching(false))
+        .then((found) => !cancelled && setResults(found))
+        .catch((e) => !cancelled && fail(e))
+        .finally(() => !cancelled && setSearching(false))
     }, 300)
-    return () => clearTimeout(timer)
+    return () => {
+      cancelled = true
+      clearTimeout(timer)
+    }
   }, [trimmed])
 
   const uris = useMemo(() => recs.flatMap((r) => (tracks[r.name] ?? []).map((t) => t.uri)), [recs, tracks])
 
   function resetResults() {
+    runId.current++
     setRecs([])
     setTracks({})
     setPlaylistUrl(null)
+    setPhase('idle')
   }
 
   async function chooseFestival(festival: FestivalSummary) {
@@ -88,9 +109,10 @@ export default function App() {
       setLineup(next)
       setQuery('')
       setResults([])
+      setEditing(false)
       resetResults()
     } catch (e) {
-      setError(String(e))
+      fail(e)
     } finally {
       setLoadingLineup(false)
     }
@@ -100,11 +122,14 @@ export default function App() {
     if (!lineup) return
     setError(null)
     resetResults()
+    const run = runId.current
+    const stale = () => runId.current !== run
     try {
       let taste = profile
       if (!taste) {
         setPhase('profile')
         taste = await fetchTasteProfile()
+        if (stale()) return
         setProfile(taste)
       }
       setPhase('ranking')
@@ -119,18 +144,23 @@ export default function App() {
           discovery: ADVENTUROUS,
         }),
       })
-      if (!res.ok) throw new Error(`Recommend failed (${res.status})`)
+      if (!res.ok) {
+        const body = await res.json().catch(() => null)
+        throw new Error(body?.error ?? `Recommend failed (${res.status})`)
+      }
       const data: { recommendations: Recommendation[] } = await res.json()
+      if (stale()) return
       setRecs(data.recommendations)
       setPhase('done')
       await Promise.all(
         data.recommendations.map(async (r) => {
           const found = await findTracks(r.name).catch(() => [])
-          setTracks((prev) => ({ ...prev, [r.name]: found }))
+          if (!stale()) setTracks((prev) => ({ ...prev, [r.name]: found }))
         }),
       )
     } catch (e) {
-      setError(String(e))
+      if (stale()) return
+      fail(e)
       setPhase('idle')
     }
   }
@@ -148,7 +178,7 @@ export default function App() {
         ),
       )
     } catch (e) {
-      setError(String(e))
+      fail(e)
     } finally {
       setCreating(false)
     }

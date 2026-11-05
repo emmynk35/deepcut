@@ -21,33 +21,44 @@ async function mapLimit<T, R>(items: T[], fn: (item: T) => Promise<R>): Promise<
   return results
 }
 
-// Not-found acts are skipped so they are never recommended, and reported back instead.
+// Retries once on transient Last.fm failures; "not found" is a normal answer and is not retried.
+async function withRetry<T>(fn: () => Promise<T>): Promise<T> {
+  try {
+    return await fn()
+  } catch (err) {
+    if (err instanceof LastFmError && err.status === 404) throw err
+    await new Promise((resolve) => setTimeout(resolve, 700))
+    return fn()
+  }
+}
+
+// Acts Last.fm doesn't know (or can't answer for) are skipped so they are never recommended.
 async function enrich(
   apiKey: string,
   artists: FestivalArtist[],
 ): Promise<{ lineup: LineupArtist[]; unmatched: string[] }> {
   const rows = await mapLimit<FestivalArtist, LineupArtist | null>(artists, async (a) => {
     try {
-      const [info, similar] = await Promise.all([getInfo(apiKey, a.name), getSimilar(apiKey, a.name, 100)])
+      const [info, similar] = await withRetry(() =>
+        Promise.all([getInfo(apiKey, a.name), getSimilar(apiKey, a.name, 100)]),
+      )
       return { name: a.name, likes: a.likes, listeners: info.listeners, similar }
     } catch (err) {
-      if (err instanceof LastFmError && err.status === 404) return null
-      throw err
+      if (!(err instanceof LastFmError && err.status === 404)) console.warn(`Last.fm lookup failed for ${a.name}`)
+      return null
     }
   })
-  return {
-    lineup: rows.filter((r): r is LineupArtist => r !== null),
-    unmatched: artists.filter((_, i) => rows[i] === null).map((a) => a.name),
-  }
+  const lineup = rows.filter((r): r is LineupArtist => r !== null)
+  if (lineup.length === 0) throw new LastFmError('Last.fm is unavailable right now. Try again shortly.', 502)
+  return { lineup, unmatched: artists.filter((_, i) => rows[i] === null).map((a) => a.name) }
 }
 
 async function neighbors(apiKey: string, taste: TasteArtist[]): Promise<Record<string, SimilarArtist[]>> {
   const entries = await mapLimit(taste, async (t) => {
     try {
-      return [t.name, await getSimilar(apiKey, t.name, 100)] as const
-    } catch (err) {
-      if (err instanceof LastFmError && err.status === 404) return [t.name, []] as const
-      throw err
+      return [t.name, await withRetry(() => getSimilar(apiKey, t.name, 100))] as const
+    } catch {
+      return [t.name, []] as const
     }
   })
   return Object.fromEntries(entries)
