@@ -24,6 +24,8 @@ export interface ScoreOptions {
   familiar?: string[]
   // Last.fm neighbors of the user's artists, keyed by artist name. Adds the reverse direction.
   userSimilar?: Record<string, SimilarArtist[]>
+  // Acts less "discoverable" than this (too popular) are dropped.
+  minDiscovery?: number
   limit?: number
 }
 
@@ -62,7 +64,7 @@ export function rankArtists(
   taste: TasteArtist[],
   options: ScoreOptions = {},
 ): Recommendation[] {
-  const { tasteWeight = 0.6, discoveryWeight = 0.4, limit = 10 } = options
+  const { tasteWeight = 0.6, discoveryWeight = 0.4, limit = 10, minDiscovery = 0.15 } = options
   const known = new Set([...(options.familiar ?? []), ...taste.map((t) => t.name)].map(normalizeName))
   const totalWeight = taste.reduce((sum, t) => sum + t.weight, 0)
   if (totalWeight === 0) return []
@@ -90,7 +92,7 @@ export function rankArtists(
           .map(({ artist, similarity: s }) => ({ artist, similarity: s })),
       }
     })
-    .filter((c) => c.rawTaste > 0)
+    .filter((c) => c.rawTaste > 0 && c.discovery >= minDiscovery)
 
   const maxTaste = Math.max(...candidates.map((c) => c.rawTaste), 0)
   return candidates

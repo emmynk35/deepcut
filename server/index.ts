@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import express from 'express'
 import { getInfo, getSimilar, LastFmError } from './lastfm.ts'
+import { recommend } from './recommend.ts'
 
 const PORT = Number(process.env.PORT ?? 3001)
 const apiKey = process.env.LASTFM_API_KEY
@@ -43,6 +44,25 @@ app.get('/api/artists/info', async (req, res, next) => {
   if (!artist) return void res.status(400).json({ error: 'name is required' })
   try {
     res.json(await getInfo(apiKey, artist))
+  } catch (err) {
+    next(err)
+  }
+})
+
+app.post('/api/recommend', express.json({ limit: '1mb' }), async (req, res, next) => {
+  const { taste, familiar, limit } = req.body ?? {}
+  const validTaste =
+    Array.isArray(taste) &&
+    taste.length > 0 &&
+    taste.length <= 50 &&
+    taste.every((t) => typeof t?.name === 'string' && typeof t?.weight === 'number')
+  if (!validTaste || !Array.isArray(familiar) || !familiar.every((f) => typeof f === 'string')) {
+    return void res.status(400).json({ error: 'taste and familiar are required' })
+  }
+  try {
+    const festival = JSON.parse(await readFile(lineupPath, 'utf8'))
+    const count = Number.isInteger(limit) ? Math.min(Math.max(limit, 1), 50) : 10
+    res.json(await recommend(apiKey, festival.artists, taste, familiar, count))
   } catch (err) {
     next(err)
   }

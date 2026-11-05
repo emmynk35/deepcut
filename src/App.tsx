@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { spotifyGet } from './spotify/api.ts'
 import { normalizeName } from './recommend/normalize.ts'
+import { fetchTasteProfile } from './spotify/taste.ts'
+import type { TasteProfile } from './spotify/profile.ts'
+import type { Recommendation } from './recommend/score.ts'
 import { getAccessToken, handleCallback, login, logout } from './spotify/auth.ts'
 
 interface SpotifyArtist {
@@ -86,6 +89,8 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(() => getAccessToken() !== null)
   const [checks, setChecks] = useState<Check[] | null>(null)
   const [mapping, setMapping] = useState<string[] | 'running' | null>(null)
+  const [profile, setProfile] = useState<TasteProfile | 'running' | null>(null)
+  const [recs, setRecs] = useState<Recommendation[] | 'running' | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -144,6 +149,71 @@ export default function App() {
                 <li key={l}>{l}</li>
               ))}
             </ul>
+          )}
+          <h2>Taste profile</h2>
+          <button
+            disabled={profile === 'running'}
+            onClick={() => {
+              setProfile('running')
+              fetchTasteProfile()
+                .then(setProfile)
+                .catch((e) => {
+                  setProfile(null)
+                  setError(String(e))
+                })
+            }}
+          >
+            Build taste profile
+          </button>
+          {profile === 'running' && <p>Running…</p>}
+          {profile && profile !== 'running' && (
+            <>
+              <p>{profile.familiar.length} artists known. Top taste artists:</p>
+              <ol>
+                {profile.taste.map((t) => (
+                  <li key={t.name}>
+                    {t.name} ({t.weight.toFixed(2)})
+                  </li>
+                ))}
+              </ol>
+              <h2>Recommendations</h2>
+              <button
+                disabled={recs === 'running'}
+                onClick={() => {
+                  setRecs('running')
+                  fetch('/api/recommend', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ taste: profile.taste, familiar: profile.familiar, limit: 10 }),
+                  })
+                    .then(async (res) => {
+                      if (!res.ok) throw new Error(`Recommend failed (${res.status})`)
+                      setRecs(await res.json())
+                    })
+                    .catch((e) => {
+                      setRecs(null)
+                      setError(String(e))
+                    })
+                }}
+              >
+                Find hidden gems
+              </button>
+              {recs === 'running' && <p>Running… the first run can take a minute (Last.fm lookups).</p>}
+              {Array.isArray(recs) && (
+                <ol>
+                  {recs.map((r) => (
+                    <li key={r.name}>
+                      <b>{r.name}</b> — score {r.score.toFixed(2)} (taste {r.taste.toFixed(2)}, discovery{' '}
+                      {r.discovery.toFixed(2)}) · like{' '}
+                      {r.reasons
+                        .slice(0, 3)
+                        .map((x) => x.artist)
+                        .join(', ')}
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </>
           )}
         </>
       )}

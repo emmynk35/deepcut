@@ -32,7 +32,14 @@ describe('rankArtists', () => {
     const names = rankArtists(lineup, taste).map((r) => r.name)
     expect(names).not.toContain('Unrelated')
     expect(names).not.toContain('Overmono')
-    expect(rankArtists(lineup, taste, { familiar: ['Small Act'] }).map((r) => r.name)).toEqual(['Big Act'])
+    expect(rankArtists(lineup, taste, { familiar: ['Small Act'], minDiscovery: 0 }).map((r) => r.name)).toEqual([
+      'Big Act',
+    ])
+  })
+
+  it('drops acts that are too popular to be a discovery', () => {
+    const names = rankArtists(lineup, taste).map((r) => r.name)
+    expect(names).not.toContain('Big Act')
   })
 
   it('uses the reverse direction from the user artist neighbors', () => {
