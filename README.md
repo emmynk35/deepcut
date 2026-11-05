@@ -49,6 +49,10 @@ npm run preview  # preview the production build
 - **Phase 3** – Frontend experience: festival page, artist cards, playlist export, saved list.
 - **Phase 4** – Polish: tuning controls, discovery intensity, responsive UI.
 
+## Attribution and data terms
+
+Artist similarity data is provided by [Last.fm](https://www.last.fm). This is a non-commercial portfolio project and is not publicly hosted (Last.fm requires written approval for public pages). Cached Last.fm data is not committed; regenerate it with `npm run coverage:lastfm`. Spotify data comes from the Spotify Web API under Development Mode.
+
 ## Status
 
 Early development.

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { spotifyGet } from './spotify/api.ts'
+import { normalizeName } from './recommend/normalize.ts'
 import { getAccessToken, handleCallback, login, logout } from './spotify/auth.ts'
 
 interface SpotifyArtist {
@@ -57,9 +58,34 @@ async function runChecks(): Promise<Check[]> {
   return checks
 }
 
+// S5: can we find the right Spotify artist's tracks by searching artist:"name"?
+async function runTrackMapping(): Promise<string[]> {
+  const res = await fetch('/api/festival')
+  if (!res.ok) throw new Error(`/api/festival failed (${res.status}); is the API server running?`)
+  const { artists } = (await res.json()) as { artists: { name: string }[] }
+  const sample = artists.filter((_, i) => i % Math.floor(artists.length / 20) === 0).slice(0, 20)
+  const lines: string[] = []
+  let correct = 0
+  for (const { name } of sample) {
+    try {
+      const r = await spotifyGet<{ tracks: { items: { uri: string; name: string; artists: { name: string }[] }[] } }>(
+        `/search?q=${encodeURIComponent(`artist:"${name}"`)}&type=track&limit=10`,
+      )
+      const key = normalizeName(name)
+      const hits = r.tracks.items.filter((t) => t.artists.some((a) => normalizeName(a.name) === key))
+      if (hits.length > 0) correct++
+      lines.push(`${hits.length > 0 ? '✅' : '❌'} ${name}: ${hits.length}/${r.tracks.items.length} tracks by this artist${hits[0] ? ` (e.g. ${hits[0].name})` : ''}`)
+    } catch (err) {
+      lines.push(`❌ ${name}: ${String(err)}`)
+    }
+  }
+  return [`Correct artist found for ${correct}/${sample.length} (${Math.round((correct / sample.length) * 100)}%)`, ...lines]
+}
+
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(() => getAccessToken() !== null)
   const [checks, setChecks] = useState<Check[] | null>(null)
+  const [mapping, setMapping] = useState<string[] | 'running' | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -99,8 +125,31 @@ export default function App() {
               </li>
             ))}
           </ul>
+          <h2>Track mapping test (S5)</h2>
+          <button
+            disabled={mapping === 'running'}
+            onClick={() => {
+              setMapping('running')
+              runTrackMapping()
+                .then(setMapping)
+                .catch((e) => setMapping([`❌ ${String(e)}`]))
+            }}
+          >
+            Run track mapping test
+          </button>
+          {mapping === 'running' && <p>Running… (about 20 searches)</p>}
+          {Array.isArray(mapping) && (
+            <ul>
+              {mapping.map((l) => (
+                <li key={l}>{l}</li>
+              ))}
+            </ul>
+          )}
         </>
       )}
+      <footer style={{ marginTop: 32, fontSize: 12 }}>
+        Artist similarity data from <a href="https://www.last.fm">Last.fm</a>.
+      </footer>
     </main>
   )
 }

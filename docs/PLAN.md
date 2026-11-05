@@ -70,7 +70,7 @@ Discovery Score = Taste Match × Discovery Potential
 
 ## Open questions / unverified
 
-1. **Spotify `GET /artists/{id}` genres** — not confirmed to still return `genres`. If not, use Last.fm tags.
+1. **Spotify `GET /artists/{id}` genres** — **resolved:** Spotify returns no `genres`, `popularity` or `followers` for artists. Use Last.fm tags and listener counts. Top artists (10), top/recent tracks, saved tracks (4,335), followed artists and search all work.
 2. **Spotify app not registered yet** — redirect URI rules (loopback `127.0.0.1` vs `localhost`) unverified.
 3. **Last.fm coverage** — only ~6 artists tested; some lineup acts will be missing or mismatched (e.g. `Jkyl & Hyde`).
 4. **Lineup accuracy** — scraped from a third-party page; spot-check names and casing.
@@ -100,6 +100,11 @@ Run as short spikes, in this order. Each has a pass/fail check and a fallback, s
 
 ### Decisions needed from you
 - **S1 result (2026-11-04):** 130 of 153 acts usable (85%). 11 not found (mostly local/community acts) and 12 with fewer than 5 similar artists. Data cached in `data/lastfm-cache.json` via `npm run coverage:lastfm`. Median Last.fm listeners are about 64k, so there's plenty of spread for a "smallness" signal.
+- **S2:** skipped. Demo data, low value; acts with no Last.fm data are simply not recommended.
+- **S3 (2026-11-04):** passed. Spotify PKCE login and all endpoint checks were green in Development Mode.
+- **S4 (2026-11-04):** done. `src/recommend/` implements `taste^0.6 × discovery^0.4` with unit tests (`npm test`). Taste uses Last.fm similarity in both directions (lineup act → user artist and user artist → lineup act), weighted by the user's artist rank. Discovery is 0.7 × listener smallness + 0.3 × festival-likes smallness (log scale). Run `npm run s4:profiles` to eyeball 3 fake profiles; results were plausible (e.g. Fred again.. + Barry Can't Swim → Swimming Paul, Sammy Virji, Daniel Allan). Observed: discovery scores sit low (0.1–0.4) because the lineup has big headliners; consider rescaling later.
+- **S6 (2026-11-04):** done. Last.fm terms allow non-commercial use only, require credit and links back to Last.fm, require written approval for public pages, cap stored data at 100 MB and forbid sub-licensing. Actions taken: attribution in the app footer and README; `data/lastfm-cache.json` is gitignored (regenerate with `npm run coverage:lastfm`); no public hosting. When artist pages are built, link each artist to `https://www.last.fm/music/<name>`.
+- **S7:** dropped. EDMDb isn't used.
 - **Hosting (Q10):** decided: no hosting for now; local run plus a recorded demo.
 - **Q5 Festival date:** decided: keep Electric Forest 2026 as demo data.
 - **Q7 Weights:** start with taste 0.6 / discovery 0.4, tune against S4's profiles.
@@ -109,4 +114,6 @@ Run as short spikes, in this order. Each has a pass/fail check and a fallback, s
 - Rotate the EDMDb key and Last.fm shared secret (both were pasted in chat); delete the unused `EDMDB_API_KEY` from `.env`.
 
 ### Order
+**S5 result: passed (18/20, 90%).** Misses were tiny acts with no Spotify tracks (Daniel Donato's Cosmic Country, Detroit Party Band). Search order is used for track selection; acts with no tracks are skipped for playlists. Results for some acts include other artists' tracks, so filter by artist ID.
+
 S1 → S2 (parallel, no input needed) → S3 (needs your Spotify Client ID) → S4 → S5 → S6/S7 in the background. S1 and S4 can proceed while you register the Spotify app.
