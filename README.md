@@ -8,7 +8,7 @@ DeepCut helps festivalgoers discover smaller, under-the-radar artists on an upco
 
 1. **Choose a festival** – search by name and the lineup loads automatically.
 2. **Connect Spotify** – analyze your listening history and favorite artists.
-3. **Discover hidden gems** – smaller lineup artists that match your taste.
+3. **Discover hidden gems** – 21 smaller lineup artists that match your taste.
 4. **Explore** – recommended songs and why each artist might appeal to you.
 5. **Generate a playlist** – listen before the festival.
 6. **Save discoveries** – keep a list of artists to see live.
@@ -21,7 +21,11 @@ Artists are ranked with a transparent weighted model:
 Discovery Score = Taste Match × Discovery Potential
 ```
 
-Signals: listening history, similar artists/genres, familiarity, artist popularity, and festival billing position.
+- **Taste match**: your top, followed, saved and recent Spotify artists, matched to each lineup act through Last.fm similar-artist links.
+- **Discovery potential**: Last.fm listener counts and Festival Dust likes, so smaller acts score higher.
+- **Familiarity**: artists you already listen to or follow are excluded.
+
+The app runs in an adventurous mode that weights discovery more heavily. Spotify no longer exposes artist popularity or genres, which is why Last.fm is used.
 
 ## Tech stack
 
@@ -53,7 +57,8 @@ Open http://127.0.0.1:5173, search for a festival, connect Spotify, and click **
 - **Phase 1** – Setup, festival lineups, Spotify login, taste profile. ✅
 - **Phase 2** – Discovery algorithm, representative tracks, explanations. ✅
 - **Phase 3** – Festival search, artist cards, playlist export, saved list. ✅
-- **Phase 4** – Polish: responsive UI, tuning, demo recording. In progress.
+- **Phase 4** – Polish: responsive UI, bug pass, playlist export verified. ✅
+- **Next** – demo recording.
 
 ## Attribution and data terms
 
@@ -61,4 +66,4 @@ Artist similarity data is provided by [Last.fm](https://www.last.fm). This is a 
 
 ## Status
 
-Early development.
+Working end to end locally.
