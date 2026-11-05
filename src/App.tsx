@@ -4,6 +4,9 @@ import { normalizeName } from './recommend/normalize.ts'
 import { fetchTasteProfile } from './spotify/taste.ts'
 import type { TasteProfile } from './spotify/profile.ts'
 import type { Recommendation } from './recommend/score.ts'
+import { explain } from './recommend/explain.ts'
+import type { PickedTrack } from './recommend/pickTracks.ts'
+import { findTracks } from './spotify/tracks.ts'
 import { getAccessToken, handleCallback, login, logout } from './spotify/auth.ts'
 
 interface SpotifyArtist {
@@ -91,6 +94,7 @@ export default function App() {
   const [mapping, setMapping] = useState<string[] | 'running' | null>(null)
   const [profile, setProfile] = useState<TasteProfile | 'running' | null>(null)
   const [recs, setRecs] = useState<Recommendation[] | 'running' | null>(null)
+  const [tracks, setTracks] = useState<Record<string, PickedTrack[]>>({})
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -188,7 +192,12 @@ export default function App() {
                   })
                     .then(async (res) => {
                       if (!res.ok) throw new Error(`Recommend failed (${res.status})`)
-                      setRecs(await res.json())
+                      const list: Recommendation[] = await res.json()
+                      setRecs(list)
+                      const entries = await Promise.all(
+                        list.map(async (r) => [r.name, await findTracks(r.name).catch(() => [])] as const),
+                      )
+                      setTracks(Object.fromEntries(entries))
                     })
                     .catch((e) => {
                       setRecs(null)
@@ -203,12 +212,15 @@ export default function App() {
                 <ol>
                   {recs.map((r) => (
                     <li key={r.name}>
-                      <b>{r.name}</b> — score {r.score.toFixed(2)} (taste {r.taste.toFixed(2)}, discovery{' '}
-                      {r.discovery.toFixed(2)}) · like{' '}
-                      {r.reasons
-                        .slice(0, 3)
-                        .map((x) => x.artist)
-                        .join(', ')}
+                      <b>{r.name}</b> — score {r.score.toFixed(2)}
+                      <div>{explain(r)}</div>
+                      <div style={{ fontSize: 13 }}>
+                        {tracks[r.name]
+                          ? tracks[r.name].length
+                            ? tracks[r.name].map((t) => t.name).join(' · ')
+                            : 'No tracks found on Spotify'
+                          : 'Finding tracks…'}
+                      </div>
                     </li>
                   ))}
                 </ol>
